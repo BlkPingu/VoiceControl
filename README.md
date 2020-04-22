@@ -1,3 +1,3 @@
 # voice_control
 
-voice control interfaces for openvocs
+This project is intendet to be used for voice control interface prototyping and design.

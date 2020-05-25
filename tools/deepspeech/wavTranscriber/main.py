@@ -8,18 +8,35 @@ import numpy as np
 # python3 voice_control/tools/deepspeech/wavTranscriber/main.py
 # ```
 
-model = deepspeech.Model(conf['model_file_path'], conf['beam_width'])
+def transcribe(wav):
 
-model.enableDecoderWithLM(conf['lm_file_path'], conf['trie_file_path'], conf['lm_alpha'], conf['lm_beta'])
+    model = deepspeech.Model(conf['model_file_path'], conf['beam_width'])
 
-w = wave.open(conf['audio_wave_path'], 'r')
-rate = w.getframerate()
-frames = w.getnframes()
-buffer = w.readframes(frames)
-print(rate)
-print(model.sampleRate())
-type(buffer)
-data16 = np.frombuffer(buffer, dtype=np.int16)
-type(data16)
-text = model.stt(data16)
-print(text)
+    model.enableDecoderWithLM(conf['lm_file_path'], conf['trie_file_path'], conf['lm_alpha'], conf['lm_beta'])
+
+    w = wave.open(wav, 'r')
+
+    rate = w.getframerate()
+
+    frames = w.getnframes()
+
+    buffer = w.readframes(frames)
+    #print(rate)
+    #print(model.sampleRate())
+
+    type(buffer)
+
+    data16 = np.frombuffer(buffer, dtype=np.int16)
+
+    #type(data16)
+
+    text = model.stt(data16)
+    return text
+
+
+def main():
+    [print(transcribe(dat)) for dat in conf['audio_wave_path']]
+
+
+if __name__ == "__main__":
+    main()

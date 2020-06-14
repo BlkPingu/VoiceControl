@@ -48,9 +48,9 @@ def process(transcription, keyword):
         return (transcription, keyword, False)
 
 # takes process()
-def to_array(data):
+def to_array(data, cols):
 
-    df = pd.DataFrame.from_records(data, columns =['input', 'keyword', 'result'])
+    df = pd.DataFrame.from_records(data, columns = cols)
 
     return df
 
@@ -61,7 +61,7 @@ def runner():
     transcriptions = [transcribe(dat) for dat in conf['audio_wave_path']]
     results = [process(transcription, keyword) for transcription in transcriptions]
 
-    table = to_array(results)
+    table = to_array(results, ['input', 'keyword', 'result'])
 
     print(table)
 

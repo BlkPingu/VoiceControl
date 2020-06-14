@@ -1,2 +1,11 @@
-import interfaces.TranscriberInterface as trans
-class BatchTranscriber(trans.):
+import interfaces.TranscriberInterface
+class BatchTranscriber(interfaces.TranscriberInterface, Transcriber):
+
+    def transcribe_from(wav) -> str:
+        w = wave.open(wav, 'r')
+        rate = w.getframerate()
+        frames = w.getnframes()
+        buffer = w.readframes(frames)
+        data16 = np.frombuffer(buffer, dtype=np.int16)
+        text = model.stt(data16)
+        return text

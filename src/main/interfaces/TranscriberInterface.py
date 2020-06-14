@@ -6,6 +6,6 @@ class TranscriberInterface:
         """init transcriber"""
         pass
 
-    def transcribe_from(data):
+    def transcribe_from(data) -> str:
         """takes datasource and transcribes it"""
         pass

@@ -1,12 +1,17 @@
-class Processor(interfaces.ProcessorInterface):
+from interfaces.ProcessorInterface import ProcessorInterface
+import pandas as pd
+import spacy
 
-    def __init__(self, spacy_model):
-            model = spacy.load(spacy_model)
+class Processor(ProcessorInterface):
+
+    def __init__(self):
+        self.nlp = spacy.load("en_core_web_sm")
 
 
-    def process(self, transcriped):
+    def process(self, transcription, keyword):
         """Process the transcripted string and look for a keyword"""
-            doc = nlp(transcription)
+
+        doc = self.nlp(transcription)
 
         texts = [token.text for token in doc]
 

@@ -1,4 +1,3 @@
-class LimitedProcessor(interfaces.ProcessorInterface, Processor):
+from processors.Processor import Processor
 
-    def __init__(self):
-        pass
+class LimitedProcessor(Processor):

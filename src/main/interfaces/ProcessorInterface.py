@@ -1,6 +1,4 @@
-import pandas as pd
-
-class Processor:
+class ProcessorInterface:
 
     def __init__(self, spacy_model: str):
         """Init the processor"""

@@ -3,6 +3,7 @@ import wave
 import numpy as np
 import spacy
 from config import conf
+import pandas as pd
 
 nlp = spacy.load("en_core_web_sm")
 model = deepspeech.Model(conf['model_file_path'], conf['beam_width'])
@@ -47,9 +48,11 @@ def process(transcription, keyword):
         return (transcription, keyword, False)
 
 # takes process()
-def print_result(result):
-    prompt = "{t:50s} | {k:10s} | {b:10s}".format(t=result[0], k=result[1], b=str(result[2]))
-    print(prompt)
+def to_array(data):
+
+    df = pd.DataFrame.from_records(data, columns =['input', 'keyword', 'result'])
+
+    return df
 
 
 def runner():
@@ -58,12 +61,8 @@ def runner():
     transcriptions = [transcribe(dat) for dat in conf['audio_wave_path']]
     results = [process(transcription, keyword) for transcription in transcriptions]
 
-    print("")
-    print("{t:50s} | {k:10s} | {b:15s}".format(t="input", k="keyword", b="result"))
-    print("-"*75)
-
-    [print_result(result) for result in results]
-    print("")
+    print(results)
+    print(to_array(results))
 
 def main():
     runner()

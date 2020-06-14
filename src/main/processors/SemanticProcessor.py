@@ -1,5 +1,5 @@
 class SemanticProcessor(interfaces.ProcessorInterface, Processor):
 
-    def __init__:
-        super(t, obj) =
+    def __init__(self):
+        pass
 

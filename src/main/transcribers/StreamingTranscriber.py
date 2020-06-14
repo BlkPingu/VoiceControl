@@ -1,4 +1,5 @@
 import interfaces.TranscriberInterface
+
 class StreamingTranscriber(interfaces.TranscriberInterface, Transcriber):
 
     def transcribe_from(wav):

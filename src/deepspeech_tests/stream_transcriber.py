@@ -61,8 +61,9 @@ def runner():
     transcriptions = [transcribe(dat) for dat in conf['audio_wave_path']]
     results = [process(transcription, keyword) for transcription in transcriptions]
 
-    print(results)
-    print(to_array(results))
+    table = to_array(results)
+
+    print(table)
 
 def main():
     runner()

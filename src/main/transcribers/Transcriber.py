@@ -11,6 +11,6 @@ class Transcriber(TranscriberInterface):
         self.model.enableDecoderWithLM(conf['lm_file_path'], conf['trie_file_path'], conf['lm_alpha'], conf['lm_beta'])
 
 
-    def transcribe_from(data) -> str:
+    def transcribe_from(data, *args, **kwargs) -> str:
         """transcribe data to string"""
         pass

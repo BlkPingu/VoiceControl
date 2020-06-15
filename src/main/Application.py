@@ -13,8 +13,15 @@ class Application():
         transcriptions = [self.transcriber.transcribe_from(dat) for dat in conf['audio_wave_path']]
         results = [self.processor.process(transcription, keyword) for transcription in transcriptions]
 
-        print(results)
+        return results
 
+    def runner_from_mic(self, keyword):
+        transcriptions = [self.transcriber.transcribe_from()]
+        results = [self.processor.process(transcription, keyword) for transcription in transcriptions]
+
+        return results
+
+    def print_results(self,results):
         table = self.processor.to_array(results, ['input', 'keyword', 'result'])
 
         print(table)

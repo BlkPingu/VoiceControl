@@ -5,7 +5,8 @@ import numpy as np
 
 class BatchTranscriber(Transcriber):
 
-    def transcribe_from(self, wav):
+    def transcribe_from(self, *args, **kwargs):
+        wav = kwargs.get('wav', None)
         w = wave.open(wav, 'r')
         rate = w.getframerate()
         frames = w.getnframes()

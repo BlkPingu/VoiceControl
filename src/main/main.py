@@ -2,6 +2,8 @@ from Application import Application
 from processors.Processor import Processor
 from transcribers.BatchTranscriber import BatchTranscriber
 from transcribers.StreamTranscriber import StreamTranscriber
+from transcribers.MicrophoneTranscriber import MicrophoneTranscriber
+
 from config import conf
 
 
@@ -12,9 +14,11 @@ as python3 voice_control/src/main/main.py
 
 def main():
     processor = Processor()
-    transcriber = StreamTranscriber()
+    transcriber = MicrophoneTranscriber()
     app = Application(processor, transcriber)
-    app.runner_from_file(keyword="forward")
+    results = app.runner_from_mic(keyword="forward")
+
+    app.print_results(results)
 
 if __name__ == "__main__":
     main()

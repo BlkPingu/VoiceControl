@@ -6,7 +6,8 @@ import numpy as np
 
 class StreamTranscriber(Transcriber):
 
-    def transcribe_from(self, wav):
+    def transcribe_from(self, *args, **kwargs):
+        wav = kwargs.get('wav', None)
         filename = wav
         w = wave.open(filename, 'r')
         rate = w.getframerate()

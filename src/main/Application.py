@@ -23,5 +23,4 @@ class Application():
 
     def print_results(self,results):
         table = self.processor.to_array(results, ['input', 'keyword', 'result'])
-
         print(table)

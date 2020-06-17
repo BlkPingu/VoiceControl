@@ -8,19 +8,33 @@ class Application():
         self.processor = processor
         self.transcriber = transcriber
 
-    def runner_from_file(self, keyword):
+
+    def detect_detect_batch(self, transcriptions):
 
         transcriptions = [self.transcriber.transcribe_from(dat) for dat in conf['audio_wave_path']]
-        results = [self.processor.process(transcription, keyword) for transcription in transcriptions]
 
-        return results
+        process_keyworld(transcriptions)
 
-    def runner_from_mic(self, keyword):
+        print(self.processor.results_df)
+
+
+    def detect_from_mic(self):
         transcriptions = [self.transcriber.transcribe_from()]
-        results = [self.processor.process(transcription, keyword) for transcription in transcriptions]
 
-        return results
+        process_keyworld(transcriptions)
 
-    def print_results(self,results):
-        table = self.processor.to_array(results, ['input', 'keyword', 'result'])
-        print(table)
+        print(self.processor.results_df)
+
+
+
+    def process_keyword(self, transcriptions):
+        results = List()
+        for keyword in conf['keywords']:
+            result = [self.processor.process(transcription, keyword) for transcription in transcriptions]
+            results.append(result)
+
+        data = process_keyword(self.processor, transcriptions)
+
+        df = self.processor.to_df(data, ['input', 'keyword', 'result'])
+
+        self.processor.append(df)

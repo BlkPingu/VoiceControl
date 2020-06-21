@@ -17,7 +17,7 @@ class MicrophoneTranscriber(Transcriber):
 
             fs = audio.sample_rate
             audio = np.frombuffer(audio.frame_data, np.int16)
-            text = self.model.stt(audio)
-            print(text)
-            return text
+            metadata = self.model.sttWithMetadata(audio)
+
+            return metadata
 

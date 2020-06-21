@@ -27,6 +27,6 @@ class StreamTranscriber(Transcriber):
             print(text)
             offset = end_offset
 
-        text = self.model.finishStream(context)
+        metadata = self.model.finishStreamWithMetadata(context)
 
-        return text
+        return metadata

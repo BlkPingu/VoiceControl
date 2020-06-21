@@ -23,17 +23,22 @@ class Processor(ProcessorInterface):
         """set results_df"""
         self.results_df = new
 
+    def metadata_to_string(self, metadata):
+        """join all words of a transcription to a sentence"""
+        words = [item.character for item in metadata.items]
+        return ''.join(words)
 
-    def process_keyword(self, transcription, keyword):
+    def process_keyword(self, keyword, confidence, transcription):
         """Process the transcripted string and look for a keyword"""
+
         doc = self.nlp(transcription)
 
         texts = [token.text for token in doc]
 
         if keyword in texts:
-            return (transcription, keyword, True)
+            return (transcription, keyword, confidence, True)
         else:
-            return (transcription, keyword, False)
+            return (transcription, keyword, confidence, False)
 
 
     def to_df(self, data, cols):
@@ -42,17 +47,30 @@ class Processor(ProcessorInterface):
         return df
 
 
-    def run(self, transcriptions):
+    def run(self, metadata_list):
         """run the processor"""
         results = list()
 
         keywords = conf['keywords']
 
-        for keyword, transcription in product(keywords, transcriptions):
-              result = self.process_keyword(transcription, keyword)
-              results.append(result)
+        for keyword, metadata in product(keywords, metadata_list):
+
+            transcription = self.metadata_to_string(metadata)
+
+            confidence = metadata.confidence
+
+            result = self.process_keyword(keyword, confidence, transcription)
+            results.append(result)
 
 
-        df = self.to_df(results, ['input', 'keyword', 'result'])
+        df = self.to_df(results, ['input', 'keyword', 'conficence', 'result'])
 
         self.set_results_df(df)
+
+
+
+
+
+
+
+

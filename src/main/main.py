@@ -16,9 +16,7 @@ def main():
     processor = Processor()
     transcriber = MicrophoneTranscriber()
     app = Application(processor, transcriber)
-    results = app.runner_from_mic(keyword="forward")
-
-    app.print_results(results)
+    results = app.detect_from_mic()
 
 if __name__ == "__main__":
     main()

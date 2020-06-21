@@ -1,6 +1,11 @@
 from interfaces.ProcessorInterface import ProcessorInterface
 import pandas as pd
 import spacy
+from config import conf
+from pandas.core.common import flatten
+from itertools import product
+
+
 
 class Processor(ProcessorInterface):
 
@@ -19,7 +24,7 @@ class Processor(ProcessorInterface):
         self.results_df = new
 
 
-    def process(self, str:transcription, str:keyword):
+    def process_keyword(self, transcription, keyword):
         """Process the transcripted string and look for a keyword"""
         doc = self.nlp(transcription)
 
@@ -37,10 +42,17 @@ class Processor(ProcessorInterface):
         return df
 
 
-    def append_rows(data):
-        """append new rows to existing results_df"""
-        pass
+    def run(self, transcriptions):
+        """run the processor"""
+        results = list()
+
+        keywords = conf['keywords']
+
+        for keyword, transcription in product(keywords, transcriptions):
+              result = self.process_keyword(transcription, keyword)
+              results.append(result)
 
 
-    def print_results(self):
-        print(self.results_df)
+        df = self.to_df(results, ['input', 'keyword', 'result'])
+
+        self.set_results_df(df)

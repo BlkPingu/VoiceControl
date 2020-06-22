@@ -14,9 +14,11 @@ as python3 voice_control/src/main/main.py
 
 def main():
     processor = Processor()
-    transcriber = MicrophoneTranscriber()
+    transcriber = StreamTranscriber()
+
     app = Application(processor, transcriber)
-    results = app.detect_from_mic()
+
+    app.detect_from_source()
 
 if __name__ == "__main__":
     main()

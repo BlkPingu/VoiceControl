@@ -12,6 +12,6 @@ class BatchTranscriber(Transcriber):
         frames = w.getnframes()
         buffer = w.readframes(frames)
         data16 = np.frombuffer(buffer, dtype=np.int16)
-        text = self.model.stt(data16)
+        metadata = self.model.sttWithMetadata(data16)
 
-        return text
+        return metadata

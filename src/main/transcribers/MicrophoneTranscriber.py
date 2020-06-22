@@ -13,11 +13,10 @@ class MicrophoneTranscriber(Transcriber):
         r = sr.Recognizer()
         with sr.Microphone(sample_rate=sample_rate) as source:
             print("Say Something")
-            audio = r.listen(source)
+            audio = r.listen(source,timeout=0.5,phrase_time_limit=3)
 
             fs = audio.sample_rate
             audio = np.frombuffer(audio.frame_data, np.int16)
             metadata = self.model.sttWithMetadata(audio)
-
             return metadata
 

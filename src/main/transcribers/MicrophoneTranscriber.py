@@ -10,10 +10,13 @@ class MicrophoneTranscriber(Transcriber):
     def transcribe_from(self, *args, **kwargs):
         text = ''
         sample_rate=16000
-        r = sr.Recognizer()
+        r = sr.Recognizer(language = "en-US")
         with sr.Microphone(sample_rate=sample_rate) as source:
+
+            r.adjust_for_ambient_noise(source)
+
             print("Say Something")
-            audio = r.listen(source,timeout=0.5,phrase_time_limit=3)
+            audio = r.listen(source,timeout=1, phrase_time_limit=4)
 
             fs = audio.sample_rate
             audio = np.frombuffer(audio.frame_data, np.int16)

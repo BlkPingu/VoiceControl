@@ -1,4 +1,5 @@
 conf = {
+    'base_path':'/Users/Tobias/Desktop/Bachelorarbeit/Code/VoiceControll/',
     'keywords': ['left', 'right', 'forward', 'backward'],
     'model_file_path': 'models/deepspeech-0.6.1-models/output_graph.pbmm',
     'trie_file_path': 'models/deepspeech-0.6.1-models/trie',

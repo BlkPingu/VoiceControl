@@ -7,12 +7,15 @@ from utility.Paths import path_to_base
 
 class Transcriber(TranscriberInterface):
 
-    mfp = path_to_base(conf['model_file_path'])
-    lmfp = path_to_base(conf['lm_file_path'])
-    tfp = path_to_base(conf['trie_file_path'])
+
 
 
     def __init__(self):
+
+        mfp = path_to_base(conf['model_file_path'])
+        lmfp = path_to_base(conf['lm_file_path'])
+        tfp = path_to_base(conf['trie_file_path'])
+
         self.model = deepspeech.Model(mfp, conf['beam_width'])
         self.model.enableDecoderWithLM(lmfp, tfp, conf['lm_alpha'], conf['lm_beta'])
 

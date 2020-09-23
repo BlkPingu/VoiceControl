@@ -43,6 +43,19 @@ class Processor(ProcessorInterface):
             return (transcription, keyword, confidence, False)
 
 
+    def process_keyword_csv(self, transcription, keyword):
+            """Process the transcripted string and look for a keyword"""
+
+            doc = self.nlp(transcription)
+
+            texts = [token.text for token in doc]
+
+            if keyword in texts:
+                return 1
+            else:
+                return 0
+
+
     def to_df(self, data, cols):
         """build dataframe from processed"""
         df = pd.DataFrame.from_records(data, columns = cols)
@@ -53,7 +66,12 @@ class Processor(ProcessorInterface):
         """run the processor"""
 
         if kwargs.get('csv', False):
-            data['TRANSCRIPTION_STRING'] = data['TRANSCRIPTION'].apply(lambda row: self.metadata_to_string(row))
+            data['TRANSCRIPTION_STRING'] = data['TRANSCRIPTION'].apply(lambda trans: self.metadata_to_string(trans))
+
+            data['TRANS_CONFIDENCE'] = data['TRANSCRIPTION'].apply(lambda trans: trans.confidence)
+
+            data['RESULT'] = data.apply(lambda x: self.process_keyword_csv(x['TRANSCRIPTION_STRING'],x['EXPECTED_TEXT']),axis=1)
+
             print(data)
             data.to_csv('dump.csv')
 

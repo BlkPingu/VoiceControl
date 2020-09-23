@@ -3,7 +3,8 @@ from transcribers.BatchTranscriber import BatchTranscriber
 from transcribers.StreamTranscriber import StreamTranscriber
 from transcribers.MicrophoneTranscriber import MicrophoneTranscriber
 from config import conf
-from utility.Paths import path_to_base, from_csv
+from utility.Paths import path_to_base
+import pandas as pd
 
 class Application():
 
@@ -11,9 +12,9 @@ class Application():
         self.processor = processor
         self.transcriber = transcriber
 
-    def run(self, transcriptions):
-        self.processor.run(transcriptions)
 
+
+    def print_results(self):
         out = self.processor.get_results_df()
         print(out)
 
@@ -22,15 +23,25 @@ class Application():
     def detect_from_source(self, *args, **kwargs):
         """processes input from batch of wav files"""
 
-
         if type(self.transcriber) is BatchTranscriber or StreamTranscriber:
-            if kwargs.get('csv', None):
-                paths = from_csv(conf['csv_path'], conf['uuid_col_name'], conf['wav_path_col_name'])
-                transcriptions = [self.transcriber.transcribe_from(wav=dat[conf['wav_path_col_name']]) for dat in paths]
-                self.run(transcriptions)
+            if kwargs.get('csv', False):
+
+                data = pd.read_csv(conf['csv_path'])
+
+                data['TRANSCRIPTION'] = data['PATH'].apply (lambda row: self.transcriber.transcribe_from(wav=row))
+                self.processor.run(data, csv=True)
+
             else:
                 transcriptions = [self.transcriber.transcribe_from(wav=path_to_base(dat)) for dat in conf['audio_wave_path']]
-                self.run(transcriptions)
+                transcription_df = self.to_df(transcriptions, ['transcriptions'])
+                self.processor.run(transcription_df)
+
         elif type(self.transcriber) is MicrophoneTranscriber:
             transcriptions = [self.transcriber.transcribe_from()]
-            self.run(transcriptions)
+            self.processor.run(transcriptions)
+
+
+
+
+
+

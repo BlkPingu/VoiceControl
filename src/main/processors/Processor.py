@@ -49,26 +49,31 @@ class Processor(ProcessorInterface):
         return df
 
 
-    def run(self, metadata_list):
+    def run(self, data, *args, **kwargs):
         """run the processor"""
-        results = list()
-
-        keywords = conf['keywords']
-
-        for keyword, metadata in product(keywords, metadata_list):
-
-            transcription = self.metadata_to_string(metadata)
-
-            confidence = metadata.confidence
-
-            result = self.process_keyword(keyword, confidence, transcription)
-            results.append(result)
 
 
-        df = self.to_df(results, ['input', 'keyword', 'conficence', 'result'])
 
-        self.set_results_df(df)
+        if kwargs.get('csv', False):
+            print(data)
 
+        else:
+            results = list()
+            keywords = conf['keywords']
+
+            for keyword, metadata in product(keywords, data):
+
+                transcription = self.metadata_to_string(metadata)
+
+                confidence = metadata.confidence
+
+                result = self.process_keyword(keyword, confidence, transcription)
+                results.append(result)
+
+
+            df = self.to_df(results, ['input', 'keyword', 'conficence', 'result'])
+
+            self.set_results_df(df)
 
 
 

@@ -52,10 +52,10 @@ class Processor(ProcessorInterface):
     def run(self, data, *args, **kwargs):
         """run the processor"""
 
-
-
         if kwargs.get('csv', False):
+            data['TRANSCRIPTION_STRING'] = data['TRANSCRIPTION'].apply(lambda row: self.metadata_to_string(row))
             print(data)
+            data.to_csv('dump.csv')
 
         else:
             results = list()

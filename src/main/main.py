@@ -14,11 +14,11 @@ as python3 voice_control/src/main/main.py
 
 def main():
     processor = Processor()
-    transcriber = StreamTranscriber()
+    transcriber = BatchTranscriber()
 
     app = Application(processor, transcriber)
 
-    app.detect_from_source()
+    app.detect_from_source(csv=True)
 
 if __name__ == "__main__":
     main()

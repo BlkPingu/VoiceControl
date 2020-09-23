@@ -23,10 +23,12 @@ class Processor(ProcessorInterface):
         """set results_df"""
         self.results_df = new
 
+
     def metadata_to_string(self, metadata):
         """join all words of a transcription to a sentence"""
         words = [item.character for item in metadata.items]
         return ''.join(words)
+
 
     def process_keyword(self, keyword, confidence, transcription):
         """Process the transcripted string and look for a keyword"""

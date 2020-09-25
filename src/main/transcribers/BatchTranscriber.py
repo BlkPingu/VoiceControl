@@ -11,11 +11,10 @@ class BatchTranscriber(Transcriber):
         w = wave.open(wav_path, 'r')
         rate = w.getframerate()
 
-        if rate != 16000 and rate > 0:
+        if rate != 16000:
             resample(wav_path, rate)
             w = wave.open(wav_path, 'r')
-        else:
-            print('Good' + wav_path)
+            print('Resampled:   ' + wav_path)
 
         new_rate = w.getframerate()
         frames = w.getnframes()

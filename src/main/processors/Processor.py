@@ -73,7 +73,7 @@ class Processor(ProcessorInterface):
             data['RESULT'] = data.apply(lambda x: self.process_keyword_csv(x['TRANSCRIPTION_STRING'],x['EXPECTED_TEXT']),axis=1)
 
             print(data)
-            data.to_csv('dump.csv')
+            data.to_csv(conf['result_csv'])
 
         else:
             results = list()

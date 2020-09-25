@@ -14,8 +14,10 @@ conf = {
     'lm_alpha': 0.75,
     'lm_beta': 1.85,
     'beam_width': 500,
-    'csv_path': '/Users/Tobias/Desktop/Bachelorarbeit/Code/VoiceControll/Auswertung/survey_results_small.csv',
+    'csv_path': '/Users/Tobias/Desktop/Bachelorarbeit/Code/VoiceControll/Auswertung/survey_results.csv',
     'uuid_col_name':'UUID',
     'wav_path_col_name':'PATH',
     'result_csv':'pass_result.csv'
 }
+
+ # test with: survey_results_small.csv

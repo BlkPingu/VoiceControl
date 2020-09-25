@@ -16,5 +16,6 @@ conf = {
     'beam_width': 500,
     'csv_path': '/Users/Tobias/Desktop/Bachelorarbeit/Code/VoiceControll/Auswertung/survey_results_small.csv',
     'uuid_col_name':'UUID',
-    'wav_path_col_name':'PATH'
+    'wav_path_col_name':'PATH',
+    'result_csv':'pass_result.csv'
 }

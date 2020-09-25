@@ -7,7 +7,7 @@ from utility.Resample import resample
 class BatchTranscriber(Transcriber):
 
     def transcribe_from(self, *args, **kwargs):
-        wav_path = kwargs.get('wav_path', None)
+        wav_path = kwargs.get('wav', None)
         w = wave.open(wav_path, 'r')
         rate = w.getframerate()
 

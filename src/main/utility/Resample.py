@@ -7,16 +7,10 @@ def resample(path, sr_in):
     # Read 16bit PCM WAV
     y, sr = librosa.load(path, sr=sr_in)
 
-    if librosa.get_duration(y, sr) >= 0.1:
+    if librosa.get_duration(y, sr) > 0:
         y_16k = librosa.resample(y, sr, rate)
 
         # Write out audio as 16bit PCM WAV 16kHz
         sf.write(path, y_16k, rate, subtype='PCM_16')
-        print('Resampled:   ' + path)
-
-
-    else:
-        print('Good:        ' + path)
-
 
 

@@ -5,6 +5,8 @@ from transcribers.MicrophoneTranscriber import MicrophoneTranscriber
 from config import conf
 from utility.Paths import path_to_base
 import pandas as pd
+import time
+
 
 class Application():
 
@@ -28,7 +30,10 @@ class Application():
 
                 data = pd.read_csv(conf['csv_path'])
 
+                self.transcriber.set_df_size(len(data.index))
+                print("Checking file sizes and Encoding:")
                 data['TRANSCRIPTION'] = data['PATH'].apply (lambda row: self.transcriber.transcribe_from(wav=row))
+                print("Transcribing:")
                 self.processor.run(data, csv=True)
 
             else:

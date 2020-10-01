@@ -17,7 +17,7 @@ conf = {
     'csv_path': '/Users/Tobias/Desktop/Bachelorarbeit/Code/VoiceControll/Auswertung/survey_results.csv',
     'uuid_col_name':'UUID',
     'wav_path_col_name':'PATH',
-    'result_csv':'pass_result.csv'
+    'result_csv':'result.csv'
 }
 
  # test with: survey_results_small.csv

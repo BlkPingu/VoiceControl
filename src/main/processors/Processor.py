@@ -15,7 +15,7 @@ class Processor(ProcessorInterface):
         self.nlp = spacy.load("en_core_web_sm")
         self.results_df = pd.DataFrame()
         self.progress = 0
-        self.lambda_count = 3
+        self.lambda_count = 2
         self.df_size = 0
 
     def get_df_size(self):
@@ -75,11 +75,9 @@ class Processor(ProcessorInterface):
         self.printProgressBar(self.get_progress(), self.get_lambda_count() * self.get_df_size(), prefix = 'Progress:', suffix = 'Complete', length = 50)
 
 
-    def finish_run(self):
+    def finish_run(self, data):
         data.to_csv(conf['result_csv'])
-        time.sleep(0.1)
-        self.printProgressBar(self.get_progress(), self.get_lambda_count() * self.get_df_size(), prefix = 'Progress:', suffix = 'Complete', length = 50)
-
+        print('result saved as: ' + conf['result_csv'])
 
     def metadata_to_string(self, metadata):
         """join all words of a transcription to a sentence"""
@@ -99,19 +97,6 @@ class Processor(ProcessorInterface):
             return (transcription, keyword, confidence, True)
         else:
             return (transcription, keyword, confidence, False)
-
-
-    def process_keyword_csv(self, transcription, keyword):
-        """Process the transcripted string and look for a keyword"""
-
-        self.update_progress_bar()
-        doc = self.nlp(transcription)
-        texts = [token.text for token in doc]
-        if keyword in texts:
-            return 1
-        else:
-            return 0
-
 
     def to_df(self, data, cols):
         """build dataframe from processed"""
@@ -133,9 +118,7 @@ class Processor(ProcessorInterface):
 
             data['TRANS_CONFIDENCE'] = data['TRANSCRIPTION'].apply(lambda trans: self.get_confidence(trans))
 
-            data['RESULT'] = data.apply(lambda x: self.process_keyword_csv(x['TRANSCRIPTION_STRING'],x['EXPECTED_TEXT']),axis=1)
-
-
+            self.finish_run(data)
 
         else:
             results = list()

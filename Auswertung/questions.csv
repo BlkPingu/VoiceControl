@@ -1,0 +1,55 @@
+ID,RESULT,TEXT,IDEA,TYPE
+left,1,left,5,LEFT
+drive_left,1,drive left,3,LEFT
+go_left,1,go left,3,LEFT
+move_left,1,move left,3,LEFT
+don_t_go_left,0,don't go left,6,LEFT
+leftmost,0,leftmost,4,LEFT
+left_hander,0,left-hander,4,LEFT
+felt,0,felt,1,LEFT
+theft,0,theft,8,LEFT
+left_right,0,left right,0,LEFT
+scan_left,0,scan left,7,LEFT
+turn_left,1,turn left,3,LEFT
+clefting,0,clefting,2,LEFT
+do_a_barrel_roll,1,do a barrel roll,7,NEUTRAL
+stop,1,stop,7,NEUTRAL
+go_back,1,go back,7,NEUTRAL
+go_on,1,go on,7,NEUTRAL
+go_away,1,go away,7,NEUTRAL
+right,1,right,5,RIGHT
+drive_right,1,drive right,3,RIGHT
+go_right,1,go right,3,RIGHT
+move_right,1,move right,3,RIGHT
+don_t_go_right,0,don't go right,6,RIGHT
+rightmost,0,rightmost,4,RIGHT
+right_hander,0,right-hander,4,RIGHT
+grith,0,girth,1,RIGHT
+fright,0,fright,8,RIGHT
+byte,0,byte,8,RIGHT
+scan_right,0,scan right,7,RIGHT
+turn_right,0,turn right,3,RIGHT
+write,0,write,8,RIGHT
+wright,0,wright,2,RIGHT
+right_left,0,right left,0,RIGHT
+right_away,0,right away,7,RIGHT
+forward,1,forward,5,FORWARD
+drive_forward,1,drive forward,3,FORWARD
+go_forward,1,go forward,3,FORWARD
+move_forward,1,move forward,3,FORWARD
+don_t_go_forward,0,don't go forward,6,FORWARD
+drive_ahead,0,drive ahead,9,FORWARD
+forwardness,0,forwardness,7,FORWARD
+straightforward,0,straightforward,7,FORWARD
+your_word,0,your word,9,FORWARD
+air_fright,0,air fright,9,FORWARD
+backward,1,backward,5,BACKWARD
+drive_backward,1,drive backward,3,BACKWARD
+go_backward,1,go backward,3,BACKWARD
+move_backward,1,move backward,3,BACKWARD
+don_t_go_backward,0,don't go backward,6,BACKWARD
+backwardness,0,backwardness,7,BACKWARD
+bad_word,0,bad word,9,BACKWARD
+manufactured,0,manufactured,8,BACKWARD
+placard,0,placard,8,BACKWARD
+drawback,0,drawback,1,BACKWARD
